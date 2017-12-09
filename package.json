@@ -1,7 +1,7 @@
 {
   "name": "language-cs2d-lua",
   "description": "Add syntax highlighting and snippets to CS2D Lua files in Atom",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "repository": "https://github.com/Eng1N33R/language-cs2d-lua",
   "author": "Ilya \"Eng1N33R\" <painttool@gmail.com>",
   "engines": {
