@@ -1,0 +1,560 @@
+'.source.lua':
+  'multiline comment':
+    'prefix': '-['
+    'body': '--[[ ${0:comment...}]'
+  'nested multiline comment':
+    'prefix': '=['
+    'body': '--[=[ ${0:comment...}]='
+  'function':
+    'prefix': 'fun'
+    'body': 'function ${1:FunctionName} (${2:args})\n\t${0:-- body...}\nend'
+  'anon function':
+    'prefix': 'afun'
+    'body': '${1:FunctionName} = function (${2:args})\n\t${0:-- body...}\nend'
+  'while loop':
+    'prefix': 'while'
+    'body': 'while ${1:condition} do\n\t${0:-- body...}\nend'
+  'while loop shortcut':
+    'prefix': 'whi'
+    'body': 'while ${1:condition} do\n\t${0:-- body...}\nend'
+  'repeat loop':
+    'prefix': 'repeat'
+    'body': 'repeat\n\t${0:-- body...}\nuntil ${1:condition}'
+  'repeat loop shortcut':
+    'prefix': 'rep'
+    'body': 'repeat\n\t${0:-- body...}\nuntil ${1:condition}'
+  'for i,v in ipairs()':
+    'prefix': 'fori'
+    'body': 'for ${1:i},${2:v} in ipairs(${3:table_name}) do\n\t${0:-- body...}\nend'
+  'for i=1,10':
+    'prefix': 'for'
+    'body': 'for ${1:i}=${2:1},${3:10} do\n\t${0:-- body...}\nend'
+  'for k,v in pairs()':
+    'prefix': 'forp'
+    'body': 'for ${1:k},${2:v} in pairs(${3:table_name}) do\n\t${0:-- body...}\nend'
+  'local function':
+    'prefix': 'lfun'
+    'body': 'local function ${1:FunctionName} (${2:args})\n\t${0:-- body...}\nend'
+  'local variable definition':
+    'prefix': 'local'
+    'body': 'local ${1:x} = ${0:1}'
+  'local variable definition shortcut':
+    'prefix': 'loc'
+    'body': 'local ${1:x} = ${0:1}'
+  'local table definition':
+    'prefix': 'ltab'
+    'body': 'local ${0:name} = {}'
+  'return definition':
+    'prefix': 'return'
+    'body': 'return ${0:value}'
+  'return definition shortcut':
+    'prefix': 'ret'
+    'body': 'return ${0:value}'
+  'print':
+    'prefix': 'print'
+    'body': 'print("${0:logging}")'
+  'if conditional':
+    'prefix': 'if',
+    'body': 'if ${1:value} then\n\t${0:--body...}\nend'
+  'if else conditional':
+    'prefix': 'ife',
+    'body': 'if ${1:value} then\n\t${0:--body...}\nelse\n\t${1:--body...}\nend'
+  'if not conditional':
+    'prefix': 'ifn',
+    'body': 'if not ${1:value} then\n\t${0:--body...}\nend'
+  'if not else conditional':
+    'prefix': 'ifne',
+    'body': 'if not ${1:value} then\n\t${0:--body...}\nelse\n\t${1:--body...}\nend'
+  'table definition':
+    'prefix': 'tab'
+    'body': '${0:name} = {}'
+  'table.insert':
+    'prefix': 'tabi',
+    'body': 'table.insert(${0:tableName},${1:data})'
+  'table.foreach':
+    'prefix': 'tabf',
+    'body': 'table.foreach(${0:tableName},${1:function})'
+  'table.concat':
+    'prefix': 'tabc'
+    'body': 'table.concat(${1:tableName}${2:, " "}${3:, start_index}${4:, end_index})'
+  'table.sort':
+    'prefix': 'tabs',
+    'body': 'table.sort(${1:tableName}${2:, sortfunction})'
+  'table.remove':
+    'prefix': 'tabr',
+    'body': 'table.remove(${1:tableName}${2:, position})'
+  'table.maxn':
+    'prefix': 'tabm',
+    'body': 'table.maxn(${1:tableName})'
+  'math.abs':
+    'prefix': 'abs',
+    'body': 'math.abs(${0:x})'
+  'math.acos':
+    'prefix': 'acos',
+    'body': 'math.acos(${0:x})'
+  'math.asin':
+    'prefix': 'asin',
+    'body': 'math.asin(${0:x})'
+  'math.atan':
+    'prefix': 'atan',
+    'body': 'math.atan(${0:x})'
+  'math.atan2':
+    'prefix': 'atan2',
+    'body': 'math.atan2(${0:y}, ${1:x})'
+  'math.ceil':
+    'prefix': 'ceil',
+    'body': 'math.ceil(${0:x})'
+  'math.cos':
+    'prefix': 'cos',
+    'body': 'math.cos(${0:x})'
+  'math.cosh':
+    'prefix': 'cosh',
+    'body': 'math.cosh(${0:x})'
+  'math.deg':
+    'prefix': 'deg',
+    'body': 'math.deg(${0:x})'
+  'math.exp':
+    'prefix': 'exp',
+    'body': 'math.exp(${0:x})'
+  'math.floor':
+    'prefix': 'floor',
+    'body': 'math.floor(${0:x})'
+  'math.fmod':
+    'prefix': 'fmod',
+    'body': 'math.fmod(${0:x}, ${1:y})'
+  'math.frexp':
+    'prefix': 'frexp',
+    'body': 'math.frexp(${0:x})'
+  'math.huge':
+    'prefix': 'huge',
+    'body': 'math.huge'
+  'math.ldexp':
+    'prefix': 'ldexp',
+    'body': 'math.ldexp(${0:m}, ${1:e})'
+  'math.log':
+    'prefix': 'log',
+    'body': 'math.log(${0:x})'
+  'math.log10':
+    'prefix': 'log10',
+    'body': 'math.log10(${0:x})'
+  'math.max':
+    'prefix': 'max',
+    'body': 'math.max(${0:x}, ${1:...})'
+  'math.min':
+    'prefix': 'min',
+    'body': 'math.min(${0:x}, ${1:...})'
+  'math.pi':
+    'prefix': 'pi',
+    'body': 'math.pi'
+  'math.pow':
+    'prefix': 'pow',
+    'body': 'math.pow(${0:x}, ${1:y})'
+  'math.rad':
+    'prefix': 'rad',
+    'body': 'math.rad(${0:x})'
+  'math.random':
+    'prefix': 'random',
+    'body': 'math.random(${0:m}, ${1:n})'
+  'math.randomseed':
+    'prefix': 'randomseed',
+    'body': 'math.randomseed(${0:x})'
+  'math.sin':
+    'prefix': 'sin',
+    'body': 'math.sin(${0:x})'
+  'math.sinh':
+    'prefix': 'sinh',
+    'body': 'math.sinh(${0:x})'
+  'math.sqrt':
+    'prefix': 'sqrt',
+    'body': 'math.sqrt(${0:x})'
+  'math.tan':
+    'prefix': 'tan',
+    'body': 'math.tan(${0:x})'
+  'math.tanh':
+    'prefix': 'tanh',
+    'body': 'math.tanh(${0:x})'
+
+  'addbind':
+    'prefix': 'addbind',
+    'body': 'addbind("${0:key}")',
+    'description': 'Adds a Lua key bind for the specified key. This bind will be active for all players and will trigger the "key" hook when a player presses or releases the related key.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=addbind#cmd'
+  'addhook':
+    'prefix': 'addhook',
+    'body': 'addhook("${0:hook}", "${1:functionName}"${2:, priority})',
+    'description': 'Attaches a Lua function to the hook "hook". CS2D will always call that Lua function when the event related to that hook occurs.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=addhook#cmd'
+  'ai_aim':
+    'prefix': 'ai_aim',
+    'body': 'ai_aim(${0:id}, ${1:x}, ${2:y})',
+    'description': 'Bot with given ID aims at the given position (x|y) (in pixels).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_aim#cmd'
+  'ai_attack':
+    'prefix': 'ai_attack',
+    'body': 'ai_attack(${0:id}${1:, secondary})',
+    'description': 'Bot with given ID performs a primitive attack. Set secondary to 1 to use the secondary weapon function (=attack2) instead of the primary function.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_attack#cmd'
+  'ai_build':
+    'prefix': 'ai_build',
+    'body': 'ai_build(${0:id}, ${1:building}, ${2:x}, ${3:y})',
+    'description': 'Bot with given ID tries to build a building at tile position (x|y). Building has to be a building integer ID, not a string. The position has to be a free tile next to the current position of the bot.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_build#cmd'
+  'ai_buy':
+    'prefix': 'ai_buy',
+    'body': 'ai_buy(${0:id}, ${1:itemType})',
+    'description': 'Bot with given ID tries to purchase a certain item (itemType is an integer ID).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_buy#cmd'
+  'ai_debug':
+    'prefix': 'ai_debug',
+    'body': 'ai_debug(${0:id}, ${1:text})',
+    'description': 'Set debug text for a bot (only displayed if "debugai" is enabled).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_debug#cmd'
+  'ai_drop':
+    'prefix': 'ai_drop',
+    'body': 'ai_drop(${0:id})',
+    'description': 'Bot with given ID drops its current weapon.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_drop#cmd'
+  'ai_findtarget':
+    'prefix': 'ai_findtarget',
+    'body': 'ai_findtarget(${0:id})',
+    'description': 'Returns the ID of the closest visible enemy to the bot with the specified ID or 0 when no enemy was found.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_findtarget#cmd'
+  'ai_freeline':
+    'prefix': 'ai_freeline',
+    'body': 'ai_freeline(${0:id}, ${1:x}, ${2:y})',
+    'description': 'Checks if there is a free line between the bot with the given ID and the given position (x|y) (in pixels).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_freeline#cmd'
+  'ai_goto':
+    'prefix': 'ai_goto',
+    'body': 'ai_goto(${0:id}, ${1:x}, ${2:y}${3:, walk})',
+    'description': 'Bot with the given ID goes to tile (x|y). Set walk to 1 to let it walk (silent).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_goto#cmd'
+  'ai_iattack':
+    'prefix': 'ai_iattack',
+    'body': 'ai_iattack(${0:id})',
+    'description': 'Bot with given ID performs an intelligent attack (auto reloading & weapon switching).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_iattack#cmd'
+  'ai_move':
+    'prefix': 'ai_move',
+    'body': 'ai_move(${0:id}, ${1:angle}${2:, walk})',
+    'description': 'Bot with given ID moves into a certain direction (defined with the given angle from 0° to 360°). Set walk to 1 to let it walk. Returns 1 when successful or 0 when way is blocked.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_move#cmd'
+  'ai_radio':
+    'prefix': 'ai_radio',
+    'body': 'ai_radio(${0:id}, ${1:radioid})',
+    'description': 'Bot with given ID sends a radio message.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_radio#cmd'
+  'ai_reload':
+    'prefix': 'ai_reload',
+    'body': 'ai_reload(${0:id})',
+    'description': 'Bot with given ID reloads the current weapon.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_reload#cmd'
+  'ai_respawn':
+    'prefix': 'ai_respawn',
+    'body': 'ai_respawn(${0:id})',
+    'description': 'Bot with given ID respawns (only if dead and only if the current game mode allows it).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_respawn#cmd'
+  'ai_rotate':
+    'prefix': 'ai_rotate',
+    'body': 'ai_rotate(${0:id}, ${1:angle})',
+    'description': 'Bot with given ID instantly turns to certain direction/angle (from 0° to 360°).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_rotate#cmd'
+  'ai_say':
+    'prefix': 'ai_say',
+    'body': 'ai_say(${0:id}, ${1:text})',
+    'description': 'Bot with given ID says the given text using the chat system.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_say#cmd'
+  'ai_sayteam':
+    'prefix': 'ai_sayteam',
+    'body': 'ai_sayteam(${0:id}, ${1:text})',
+    'description': 'Bot with given ID says the given text to its own team using team chat.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_sayteam#cmd'
+  'ai_selectweapon':
+    'prefix': 'ai_selectweapon',
+    'body': 'ai_selectweapon(${0:id}, ${1:itemType})',
+    'description': 'Bot with given ID selects the weapon specified with itemType (integer ID), if it possesses it.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_selectweapon#cmd'
+  'ai_spray':
+    'prefix': 'ai_spray',
+    'body': 'ai_spray(${0:id})',
+    'description': 'Bot with given ID sprays a spraylogo at its current position.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_spray#cmd'
+  'ai_use':
+    'prefix': 'ai_use',
+    'body': 'ai_use(${0:id})',
+    'description': 'Bot with given ID uses the environement (presses the use key).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=ai_use#cmd'
+  'checksumfile':
+    'prefix': 'checksumfile',
+    'body': 'checksumfile(${0:path})',
+    'description': 'Returns the SHA256 checksum of the file at this path.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=checksumfile#cmd'
+  'checksumstring':
+    'prefix': 'checksumstring',
+    'body': 'checksumstring(${0:path})',
+    'description': 'Returns the SHA256 checksum of the given string.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=checksumstring#cmd'
+  'closehostage':
+    'prefix': 'closehostage',
+    'body': 'closehostage(${0:id})',
+    'description': 'Returns the tile x and y position (2 values!) of the closest living and unused hostage to a given player. Returns -100,-100 if no hostage has been found.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=closehostage#cmd'
+  'closeitems':
+    'prefix': 'closeitems',
+    'body': 'closeitems(${0:id}, ${1:range})',
+    'description': 'Returns a Lua table with all IDs of items which are within range (tiles) of the player specified with the id parameter. Only dropped items which are within the range will be returned.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=closeitems#cmd'
+  'closeobjects':
+    'prefix': 'closeobjects',
+    'body': 'closeobjects(${0:x}, ${1:y}, ${2:radius}${3:, type})',
+    'description': 'Returns a list of objects which are within the specified radius (in pixels) around the specified position (X|Y) in pixels. If type is specified, limits the search to objects of that type.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=closeobjects#cmd'
+  'entity':
+    'prefix': 'entity',
+    'body': 'entity(${0:x}, ${1:y}, "${2:property}")',
+    'description': 'Returns a property of an entity at the tile position (X|Y). See the reference for a list of all available properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=entity#cmd'
+  'entitylist':
+    'prefix': 'entitylist',
+    'body': 'entitylist(${0:type})',
+    'description': 'Returns a Lua table of the positions (in tiles, as subtables with "x" and "y" keys) of all entities on the map. If type is specified, limits the output to entities of that type.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=entitylist#cmd'
+  'freehook':
+    'prefix': 'freehook',
+    'body': 'freehook("${0:hook}", "${1:functionName}")',
+    'description': 'Removes a function from a hook. Nothing will happen if the function has not been attached to the hook with "addhook" beforehand.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=freehook#cmd'
+  'freeimage':
+    'prefix': 'freeimage',
+    'body': 'freeimage(${0:id})',
+    'description': 'Removes an image completely. Take care to manually delete the integer ID from any tables it might be stored in.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=freeimage#cmd'
+  'freetimer':
+    'prefix': 'freetimer',
+    'body': 'freetimer(${0:functionName}${1:, p})',
+    'description': 'Removes timers which call a certain function with a certain parameter. Call this function without parameters or with empty strings as parameters to remove ALL timers.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=freetimer#cmd'
+  'funcs':
+    'prefix': 'funcs',
+    'body': 'funcs()',
+    'description': 'Shows Lua functions in the global namespace in the CS2D console. For debugging purposes only.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=funcs#cmd'
+  'game':
+    'prefix': 'game',
+    'body': 'game("${0:property}")',
+    'description': 'Returns a setting or property of the current game session. You can use most settings like sv_name to get their current value, always returned as a string. See the reference for a list of all properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=game#cmd'
+  'hostage':
+    'prefix': 'hostage',
+    'body': 'hostage(${0:id}, "${1:property}")',
+    'description': 'Returns a property of a hostage. See the reference for a list of all properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=hostage#cmd'
+  'image':
+    'prefix': 'image',
+    'body': 'image(${0:path}, ${1:x}, ${2:y}, ${3:mode}${4, pl})',
+    'description': 'Creates an image on the map and returns the ID for that image. Specify the pl parameter if you want the image to be visible to a certain player only. The path is relative to the CS2D folder or one of several special formats. See the reference for a list of all flags and formats.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=image#cmd'
+  'imagealpha':
+    'prefix': 'imagealpha',
+    'body': 'imagealpha(${0:id}, ${1:alpha})',
+    'description': 'Changes opacity (0.0 transparent - 1.0 opqaue) of an image.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=imagealpha#cmd'
+  'imageblend':
+    'prefix': 'imageblend',
+    'body': 'imageblend(${0:id}, ${1:mode})',
+    'description': 'Changes the blending mode of an image (0 normal, 1 light, 2 shade, 3 solid).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=imageblend#cmd'
+  'imagecolor':
+    'prefix': 'imagecolor',
+    'body': 'imagecolor(${0:id}, ${1:r}, ${2:g}, ${3:b})',
+    'description': 'Changes the color of an image.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=imagecolor#cmd'
+  'imageframe':
+    'prefix': 'imageframe',
+    'body': 'imageframe(${0:id}, ${1:frame})',
+    'description': 'Changes the frame of a spritesheet. If the image is not a spritesheet, does nothing. Frames start at 1. If you attempt to set the frame index to lower than 1 or larger than the maximum number of frames, the frame will be set to the first or last frame respectively.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=imageframe#cmd'
+  'imagehitzone':
+    'prefix': 'imagehitzone',
+    'body': 'imagehitzone(${0:id}, ${1:mode}${2:, xOffset}${3:, yOffset}${4:, width}${5:, height})',
+    'description': 'Adds a hitzone to an image which reacts to shots/attacks and throws the hitzone hook. See the reference for a list of all modes and usage notes.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=imagehitzone#cmd'
+  'imagepos':
+    'prefix': 'imagepos',
+    'body': 'imagepos(${0:id}, ${1:x}, ${2:y}, ${3:rot})',
+    'description': 'Changes the position and rotation (in degrees where 0 is up) of an image.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=imagepos#cmd'
+  'imagescale':
+    'prefix': 'imagescale',
+    'body': 'imagescale(${0:id}, ${1:x}, ${2:y})',
+    'description': 'Changes the scale factors of an image. Values of 1 reset the size to original.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=imagescale#cmd'
+  'inentityzone':
+    'prefix': 'inentityzone',
+    'body': 'inentityzone(${0:x}, ${1:y}, ${2:type})',
+    'description': 'Checks if the tile position (x|y) is in the area of a certain entity type and returns true or false.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=inentityzone#cmd'
+  'item':
+    'prefix': 'item',
+    'body': 'item(${0:id}, "${1:property}")',
+    'description': 'Returns a property of an item instance. See the reference for a list of all properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=item#cmd'
+  'itemtype':
+    'prefix': 'itemtype',
+    'body': 'itemtype(${0:id}, "${1:property}")',
+    'description': 'Returns a property of an item type. See the reference for a list of all properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=itemtype#cmd'
+  'map':
+    'prefix': 'map',
+    'body': 'map("${0:property}")',
+    'description': 'Returns a property of the current map. See the reference for a list of all properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=map#cmd'
+  'menu':
+    'prefix': 'menu',
+    'body': 'menu(${0:id})',
+    'description': 'Opens a menu on the screen of a certain player or at the screen of every player if id is 0. See the reference for details on the format and a list of special flags.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=menu#cmd'
+  'msg':
+    'prefix': 'msg',
+    'body': 'msg(${0:text})',
+    'description': 'Sends text as a server message to all players. See the reference for details on the format.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=msg#cmd'
+  'msg2':
+    'prefix': 'msg2',
+    'body': 'msg2(${0:id}, ${1:text})',
+    'description': 'Sends text as a server message to the specified player. See the reference for details on the format.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=msg2#cmd'
+  'object':
+    'prefix': 'object',
+    'body': 'object(${0:id}, "${1:property}")',
+    'description': 'Returns a property of an object. See the reference for a list of all properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=object#cmd'
+  'objectat':
+    'prefix': 'objectat',
+    'body': 'objectat(${0:x}, ${1:y}${2:, type})',
+    'description': 'Returns the ID of the first object found at the tile position (X|Y) of any type or of the given type, if specified. The function returns 0 if nothing is found at the specified position with the specified type.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=objectat#cmd'
+  'parse':
+    'prefix': 'parse',
+    'body': 'parse(${0:cmd}${1:, stopAtSemicolon})',
+    'description': 'Executes a CS2D console command. Everything after the semicolon will be ignored, unless stopAtSemicolon is set to 0.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=parse#cmd'
+  'player':
+    'prefix': 'player',
+    'body': 'player(${0:id}, "${1:property}")',
+    'description': 'Returns a property of a player. See the reference for a list of all properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=player#cmd'
+  'playerweapons':
+    'prefix': 'playerweapons',
+    'body': 'playerweapons(${0:id})',
+    'description': 'Returns a Lua table with all weapon/item types a player carries.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=playerweapons#cmd'
+  'print':
+    'prefix': 'print',
+    'body': 'print(${0:...})',
+    'description': 'Prints all of the arguments, cast to strings with tostring(), to the CS2D console.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=print#cmd'
+  'projectile':
+    'prefix': 'projectile',
+    'body': 'projectile(${0:id}, ${1:player}, "${2:property}")',
+    'description': 'Returns a property of a projectile belonging to the specified player. Bullets are not projectiles. See the reference for a list of all properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=projectile#cmd'
+  'projectilelist':
+    'prefix': 'projectilelist',
+    'body': 'projectilelist(${0:mode}${1:, player})',
+    'description': 'Returns a Lua table containing projectile data as subtables (projectile ID under the "id" key and parent player under "player") of all flying (mode = 0) or ground (mode = 1) projectiles. You can also limit the output to the projectiles of a certain player if player is not set to 0.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=projectilelist#cmd'
+  'randomentity':
+    'prefix': 'randomentity',
+    'body': 'randomentity(${0:type}${1:, aiState}${2:, int0})',
+    'description': 'Returns the tile X and Y position (as 2 values) of a random entity of a certain type or -100,-100 if no entity has been found. If aiState is set, limits the search to entities with that AI state. If int0 is set, limits the search to entities with that int0 field value.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=randomentity#cmd'
+  'randomhostage':
+    'prefix': 'randomhostage',
+    'body': 'randomhostage(${0:unused=1})',
+    'description': 'Returns the tile X and Y position (as 2 values) of a random living hostage. Returns -100,-100 if no hostage has been found. If unused is set to 0, searches for used hostages as well. By default unused is 1.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=randomhostage#cmd'
+  'reqcld':
+    'prefix': 'reqcld',
+    'body': 'reqcld(${0:id}, ${1:mode}${2:, parameter})',
+    'description': 'Requests data from the specified player, or from everyone if id = 0. See the reference for a list of all modes and parameter options.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=reqcld#cmd'
+  'reqhttp':
+    'prefix': 'reqhttp',
+    'body': 'reqhttp(${0:hostname}, ${1:path}, ${2:mode})',
+    'description': 'Requests data from the specified remote host via HTTP. Path must start with a slash. Mode 0 requests the data as string, mode 1 requests the data as a table of bytes.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=reqhttp#cmd'
+  'setentityaistate':
+    'prefix': 'setentityaistate',
+    'body': 'setentityaistate(${0:x}, ${1:y}, ${2:aiState})',
+    'description': 'Sets the AI state value (integer) of the entity at tile position (x|y). The AI state is set to 0 on each roundstart.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=setentityaistate#cmd'
+  'sethookstate':
+    'prefix': 'sethookstate',
+    'body': 'sethookstate("${0:hook}", ${1:state})',
+    'description': 'Enables (state = 1) or disables (state = 0) a certain hook. A disabled hook never calls associated functions.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=sethookstate#cmd'
+  'stats':
+    'prefix': 'stats',
+    'body': 'stats(${0:usgnId}, "${1:property}")',
+    'description': 'Returns a certain statistic for the specified USGN account ID. See the reference for a list of all properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=stats#cmd'
+  'steamstats':
+    'prefix': 'steamstats',
+    'body': 'steamstats(${0:steamId}, "${1:property}")',
+    'description': 'Returns a certain statistic for the specified Steam account ID. See the reference for a list of all properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=steamstats#cmd'
+  'tile':
+    'prefix': 'tile',
+    'body': 'tile(${0:x}, ${1:y}, "${2:property}")',
+    'description': 'Returns a property of a tile at the specified position. See the reference for a list of all properties.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=tile#cmd'
+  'timer':
+    'prefix': 'timer',
+    'body': 'timer(${0:delay}, "${1:functionName}"${2:, parameter}${3:, count})',
+    'description': 'Creates a timer which will run the specified function every `delay` milliseconds `count` times (once by default or forever if count <= 0). If parameter (string) is specified, it is passed to the function as an argument.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=timer#cmd'
+  'tween_alpha':
+    'prefix': 'tween_alpha',
+    'body': 'tween_alpha(${0:id}, ${1:time}, ${2:alpha})',
+    'description': 'Creates an alpha fade tween which changes the transparency of an image with the specified ID.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=tween_alpha#cmd'
+  'tween_color':
+    'prefix': 'tween_color',
+    'body': 'tween_color(${0:id}, ${1:time}, ${2:r}, ${3:g}, ${4:b})',
+    'description': 'Creates a color fade tween which changes the color of an image with the specified ID.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=tween_color#cmd'
+  'tween_frame':
+    'prefix': 'tween_frame',
+    'body': 'tween_frame(${0:id}, ${1:time}, ${2:frame})',
+    'description': 'Creates a frame animation tween which changes the frame of an image with the specified ID. Only works on spritesheets.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=tween_frame#cmd'
+  'tween_move':
+    'prefix': 'tween_move',
+    'body': 'tween_move(${0:id}, ${1:time}, ${2:x}, ${3:y}${4:, rot})',
+    'description': 'Creates a movement tween which moves the image with the specified ID to x,y (pixels) and, if necessary, rotates to rot degrees (0 is up).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=tween_move#cmd'
+  'tween_rotate':
+    'prefix': 'tween_rotate',
+    'body': 'tween_rotate(${0:id}, ${1:time}, ${2:rot})',
+    'description': 'Creates a rotation tween which rotates the image with the specified ID to rot degrees in the specified time (0 is up).',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=tween_rotate#cmd'
+  'tween_rotateconstantly':
+    'prefix': 'tween_rotateconstantly',
+    'body': 'tween_rotateconstantly(${0:id}, ${1:speed})',
+    'description': 'Creates a constant rotation tween which rotates the image with the specified ID at the given speed (negative speeds for counterclockwise rotation). Active until another constant rotation tween is applied to the same image.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=tween_rotateconstantly#cmd'
+  'tween_scale':
+    'prefix': 'tween_scale',
+    'body': 'tween_scale(${0:id}, ${1:time}, ${2:x}, ${3:y})',
+    'description': 'Creates a scale tween which changes the size of an image with the specified ID. Scale values of 1 reset the image to its original size.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=tween_scale#cmd'
+  'vars':
+    'prefix': 'vars',
+    'body': 'vars()',
+    'description': 'Shows all global Lua variables in the CS2D console. For debugging purposes only.',
+    'descriptionMoreURL': 'http://cs2d.com/help.php?luacat=all&luacmd=vars#cmd'
+
+  'hooked function':
+    'prefix': 'hookfunc',
+    'body': 'addhook("${0:hookname}", "${1:functionname}")\nfunction ${1:functionname}(${2:...})\n\t${3:--body}\nend'
